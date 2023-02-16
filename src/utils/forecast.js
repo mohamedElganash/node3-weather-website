@@ -6,32 +6,25 @@
 //////////////////////////////////////////////////////////
 // const location = "egypt,cairo";
 const request = require("request");
-const forecast = (location, callback) => {
-  setTimeout(() => {
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
-      location
-    )}&appid=ed3156a245bfd5e058370356b2a1ebe7&units=imperial`;
-    // the request
-    request({ url, json: true }, (error, { body }) => {
-      if (error) {
-        callback("unable to connect to weather service!", undefined, undefined);
-      } else if (body.message) {
-        callback(`unable to find location`, undefined, undefined);
-      } else {
-        callback(
-          undefined,
-          `the weather in ${location} is ${body.weather[0].description}. It is currently ${body.main.temp} degressout. It feels like ${body.main.feels_like} degress out`,
-          location
-        );
-      }
-    });
-  }, 0);
-};
 
-//
-// getWeather(location, (error, data) => {
-//   console.log(`error : ${error}`);
-//   console.log(`data : ${data}`);
-// });
+const forecast = (location, callback) => {
+  const url = `http://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+    location
+  )}&appid=ed3156a245bfd5e058370356b2a1ebe7&units=imperial`;
+  // the request
+  request({ url, json: true }, (error, { body }) => {
+    if (error) {
+      callback("unable to connect to weather service!", undefined, undefined);
+    } else if (body.message) {
+      callback(`unable to find location`, undefined, undefined);
+    } else {
+      callback(
+        undefined,
+        `the weather in ${location} is ${body.weather[0].description}. It is currently ${body.main.temp} degressout. It feels like ${body.main.feels_like} degress out`,
+        location
+      );
+    }
+  });
+};
 
 module.exports = forecast;
