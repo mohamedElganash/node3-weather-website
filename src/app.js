@@ -23,7 +23,7 @@ app.use(express.static(publicDirectoryPath));
 //app.com  (root:home bage)
 app.get("", (req, res) => {
   res.render("index", {
-    title: "weather",
+    title: "Weather",
     name: "Mohamed Esmail",
   });
 });
